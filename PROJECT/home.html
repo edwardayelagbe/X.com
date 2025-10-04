@@ -1,0 +1,2075 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1D9BF0;
+            --secondary-color: #272C34;
+            --background-color: #000;
+            --text-color: #fff;
+            --border-color: #272C34;
+            --hover-color: #15202B;
+            --active-color: #15202B;
+            --button-color: #1D9BF0;
+            --button-hover-color: #1A8CD8;
+            --light-gray: #65666A;
+            --dark-gray: #15202B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: var(--background-color);
+            border-right: 1px solid var(--border-color);
+            padding: 20px 0;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 20px 20px 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-item:hover {
+            background-color: var(--hover-color);
+        }
+
+        .nav-item.active {
+            background-color: var(--active-color);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .nav-item i {
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        .nav-item span {
+            font-size: 16px;
+        }
+
+        .post-btn {
+            margin: 20px 20px;
+            padding: 15px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 30px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .post-btn:hover {
+            background-color: var(--button-hover-color);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            cursor: pointer;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #555;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .username {
+            font-weight: bold;
+        }
+
+        .handle {
+            color: var(--light-gray);
+            font-size: 14px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .tab.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .compose-box {
+            display: flex;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .avatar-small {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #555;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .compose-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            color: var(--text-color);
+            font-size: 16px;
+            resize: none;
+            outline: none;
+        }
+
+        .compose-actions {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .action-icon {
+            margin-right: 15px;
+            cursor: pointer;
+            color: var(--primary-color);
+            font-size: 20px;
+        }
+
+        .post-btn-small {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        /* Posts */
+        .post {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.2s;
+        }
+
+        .post:hover {
+            background-color: var(--hover-color);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .post-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #555;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .post-user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .post-name {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+
+        .post-handle {
+            color: var(--light-gray);
+            margin-right: 5px;
+        }
+
+        .post-time {
+            color: var(--light-gray);
+        }
+
+        .post-content {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 15px;
+        }
+
+        .action-button {
+            display: flex;
+            align-items: center;
+            background: transparent;
+            border: none;
+            color: var(--light-gray);
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 20px;
+            transition: color 0.2s;
+        }
+
+        .action-button:hover {
+            color: var(--text-color);
+        }
+
+        .action-button i {
+            margin-right: 5px;
+        }
+
+        .show-more {
+            color: var(--primary-color);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Right Sidebar */
+        .right-sidebar {
+            width: 350px;
+            background-color: var(--background-color);
+            border-left: 1px solid var(--border-color);
+            padding: 20px;
+            position: fixed;
+            right: 0;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .search-box {
+            background-color: var(--dark-gray);
+            border-radius: 30px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            outline: none;
+            padding: 5px;
+        }
+
+        .search-box i {
+            color: var(--light-gray);
+            margin-right: 10px;
+        }
+
+        .card {
+            background-color: var(--dark-gray);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .subscribe-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .news-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .news-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #555;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .news-content {
+            flex: 1;
+        }
+
+        .news-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .news-meta {
+            color: var(--light-gray);
+            font-size: 14px;
+        }
+
+        .trending-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .trending-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            background-color: #555;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+        }
+
+        .trending-content {
+            flex: 1;
+        }
+
+        .trending-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .trending-meta {
+            color: var(--light-gray);
+            font-size: 14px;
+        }
+
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            color: var(--light-gray);
+            font-size: 20px;
+        }
+
+        .messages-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .messages-btn i {
+            color: white;
+            font-size: 24px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .right-sidebar {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            .right-sidebar {
+                width: 100%;
+                position: static;
+                border-left: none;
+                border-top: 1px solid var(--border-color);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+
+            .right-sidebar {
+                width: 100%;
+            }
+
+            .nav-item span {
+                display: none;
+            }
+
+            .nav-item {
+                justify-content: center;
+            }
+
+            .post-btn {
+                margin: 15px;
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            .compose-box {
+                padding: 15px;
+            }
+
+            .avatar-small {
+                width: 40px;
+                height: 40px;
+            }
+
+            .post-avatar {
+                width: 40px;
+                height: 40px;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .news-item {
+                padding: 10px 0;
+            }
+
+            .trending-item {
+                padding: 10px 0;
+            }
+
+            .trending-image {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .tab {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .post {
+                padding: 15px;
+            }
+
+            .post-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .post-user-info {
+                margin-bottom: 5px;
+            }
+
+            .post-actions {
+                flex-wrap: wrap;
+            }
+
+            .action-button {
+                margin: 5px 0;
+            }
+
+            .search-box {
+                padding: 8px 12px;
+            }
+
+            .card-title {
+                font-size: 16px;
+            }
+
+            .news-title {
+                font-size: 14px;
+            }
+
+            .trending-title {
+                font-size: 14px;
+            }
+        }
+
+        /* Icons */
+        .icon {
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+        }
+
+        .fa-home::before {
+            content: "\f015";
+        }
+
+        .fa-search::before {
+            content: "\f002";
+        }
+
+        .fa-bell::before {
+            content: "\f0f3";
+        }
+
+        .fa-envelope::before {
+            content: "\f0e0";
+        }
+
+        .fa-hashtag::before {
+            content: "\f292";
+        }
+
+        .fa-users::before {
+            content: "\f0c0";
+        }
+
+        .fa-user::before {
+            content: "\f007";
+        }
+
+        .fa-ellipsis-h::before {
+            content: "\f141";
+        }
+
+        .fa-retweet::before {
+            content: "\f079";
+        }
+
+        .fa-heart::before {
+            content: "\f004";
+        }
+
+        .fa-chart-bar::before {
+            content: "\f080";
+        }
+
+        .fa-bookmark::before {
+            content: "\f02e";
+        }
+
+        .fa-share::before {
+            content: "\f1e0";
+        }
+
+        .fa-camera::before {
+            content: "\f030";
+        }
+
+        .fa-image::before {
+            content: "\f03e";
+        }
+
+        .fa-smile::before {
+            content: "\f118";
+        }
+
+        .fa-map-marker-alt::before {
+            content: "\f3c5";
+        }
+
+        .fa-times::before {
+            content: "\f00d";
+        }
+
+        .fa-arrow-up::before {
+            content: "\f062";
+        }
+
+        .fa-paper-plane::before {
+            content: "\f1d8";
+        }
+
+        .fa-plus::before {
+            content: "\f067";
+        }
+
+        .fa-cog::before {
+            content: "\f013";
+        }
+
+        .fa-comment::before {
+            content: "\f075";
+        }
+
+        .fa-thumbs-up::before {
+            content: "\f164";
+        }
+
+        .fa-eye::before {
+            content: "\f06e";
+        }
+
+        .fa-clock::before {
+            content: "\f017";
+        }
+
+        .fa-globe::before {
+            content: "\f0ac";
+        }
+
+        .fa-star::before {
+            content: "\f005";
+        }
+
+        .fa-music::before {
+            content: "\f001";
+        }
+
+        .fa-video::before {
+            content: "\f03d";
+        }
+
+        .fa-link::before {
+            content: "\f0c1";
+        }
+
+        .fa-quote-left::before {
+            content: "\f10d";
+        }
+
+        .fa-quote-right::before {
+            content: "\f10e";
+        }
+
+        .fa-check::before {
+            content: "\f00c";
+        }
+
+        .fa-exclamation::before {
+            content: "\f12a";
+        }
+
+        .fa-question::before {
+            content: "\f128";
+        }
+
+        .fa-lock::before {
+            content: "\f023";
+        }
+
+        .fa-unlock::before {
+            content: "\f09c";
+        }
+
+        .fa-trash::before {
+            content: "\f1f8";
+        }
+
+        .fa-edit::before {
+            content: "\f044";
+        }
+
+        .fa-download::before {
+            content: "\f019";
+        }
+
+        .fa-upload::before {
+            content: "\f093";
+        }
+
+        .fa-print::before {
+            content: "\f02f";
+        }
+
+        .fa-save::before {
+            content: "\f0c7";
+        }
+
+        .fa-file::before {
+            content: "\f15b";
+        }
+
+        .fa-folder::before {
+            content: "\f07b";
+        }
+
+        .fa-tag::before {
+            content: "\f02b";
+        }
+
+        .fa-tags::before {
+            content: "\f02c";
+        }
+
+        .fa-calendar::before {
+            content: "\f073";
+        }
+
+        .fa-clock-o::before {
+            content: "\f017";
+        }
+
+        .fa-hourglass::before {
+            content: "\f254";
+        }
+
+        .fa-battery-full::before {
+            content: "\f240";
+        }
+
+        .fa-battery-half::before {
+            content: "\f242";
+        }
+
+        .fa-battery-empty::before {
+            content: "\f244";
+        }
+
+        .fa-signal::before {
+            content: "\f012";
+        }
+
+        .fa-wifi::before {
+            content: "\f1eb";
+        }
+
+        .fa-bluetooth::before {
+            content: "\f293";
+        }
+
+        .fa-bluetooth-b::before {
+            content: "\f294";
+        }
+
+        .fa-bullhorn::before {
+            content: "\f0a1";
+        }
+
+        .fa-megaphone::before {
+            content: "\f130";
+        }
+
+        .fa-bell-slash::before {
+            content: "\f1f6";
+        }
+
+        .fa-volume-off::before {
+            content: "\f026";
+        }
+
+        .fa-volume-down::before {
+            content: "\f027";
+        }
+
+        .fa-volume-up::before {
+            content: "\f028";
+        }
+
+        .fa-mute::before {
+            content: "\f131";
+        }
+
+        .fa-headphones::before {
+            content: "\f025";
+        }
+
+        .fa-microphone::before {
+            content: "\f130";
+        }
+
+        .fa-microphone-slash::before {
+            content: "\f131";
+        }
+
+        .fa-video-camera::before {
+            content: "\f03d";
+        }
+
+        .fa-photo::before {
+            content: "\f03e";
+        }
+
+        .fa-picture-o::before {
+            content: "\f03e";
+        }
+
+        .fa-camera-retro::before {
+            content: "\f083";
+        }
+
+        .fa-camera-alt::before {
+            content: "\f030";
+        }
+
+        .fa-video-camera-alt::before {
+            content: "\f03d";
+        }
+
+        .fa-film::before {
+            content: "\f008";
+        }
+
+        .fa-tv::before {
+            content: "\f26c";
+        }
+
+        .fa-desktop::before {
+            content: "\f108";
+        }
+
+        .fa-laptop::before {
+            content: "\f109";
+        }
+
+        .fa-tablet::before {
+            content: "\f10a";
+        }
+
+        .fa-mobile::before {
+            content: "\f10b";
+        }
+
+        .fa-mobile-alt::before {
+            content: "\f3cd";
+        }
+
+        .fa-tablet-alt::before {
+            content: "\f3fb";
+        }
+
+        .fa-laptop-code::before {
+            content: "\f5fc";
+        }
+
+        .fa-server::before {
+            content: "\f233";
+        }
+
+        .fa-database::before {
+            content: "\f1c0";
+        }
+
+        .fa-cloud::before {
+            content: "\f0c2";
+        }
+
+        .fa-cloud-upload::before {
+            content: "\f0ee";
+        }
+
+        .fa-cloud-download::before {
+            content: "\f0ed";
+        }
+
+        .fa-cloud-upload-alt::before {
+            content: "\f382";
+        }
+
+        .fa-cloud-download-alt::before {
+            content: "\f381";
+        }
+
+        .fa-umbrella::before {
+            content: "\f0e9";
+        }
+
+        .fa-sun::before {
+            content: "\f185";
+        }
+
+        .fa-moon::before {
+            content: "\f186";
+        }
+
+        .fa-star-half::before {
+            content: "\f089";
+        }
+
+        .fa-star-o::before {
+            content: "\f005";
+        }
+
+        .fa-star-half-o::before {
+            content: "\f123";
+        }
+
+        .fa-star-half-alt::before {
+            content: "\f5c0";
+        }
+
+        .fa-star-o-alt::before {
+            content: "\f005";
+        }
+
+        .fa-heart-o::before {
+            content: "\f004";
+        }
+
+        .fa-heart-half::before {
+            content: "\f21e";
+        }
+
+        .fa-heart-half-o::before {
+            content: "\f21e";
+        }
+
+        .fa-heart-half-alt::before {
+            content: "\f21e";
+        }
+
+        .fa-heart-o-alt::before {
+            content: "\f004";
+        }
+
+        .fa-thumbs-up-o::before {
+            content: "\f164";
+        }
+
+        .fa-thumbs-down-o::before {
+            content: "\f165";
+        }
+
+        .fa-thumbs-up-alt::before {
+            content: "\f164";
+        }
+
+        .fa-thumbs-down-alt::before {
+            content: "\f165";
+        }
+
+        .fa-thumbs-up-o-alt::before {
+            content: "\f164";
+        }
+
+        .fa-thumbs-down-o-alt::before {
+            content: "\f165";
+        }
+
+        .fa-comment-o::before {
+            content: "\f075";
+        }
+
+        .fa-comment-alt::before {
+            content: "\f27a";
+        }
+
+        .fa-comment-o-alt::before {
+            content: "\f075";
+        }
+
+        .fa-comments-o::before {
+            content: "\f086";
+        }
+
+        .fa-comments-alt::before {
+            content: "\f086";
+        }
+
+        .fa-comments-o-alt::before {
+            content: "\f086";
+        }
+
+        .fa-share-alt::before {
+            content: "\f1e0";
+        }
+
+        .fa-share-alt-square::before {
+            content: "\f1e1";
+        }
+
+        .fa-share-o::before {
+            content: "\f1e0";
+        }
+
+        .fa-share-o-alt::before {
+            content: "\f1e0";
+        }
+
+        .fa-retweet-alt::before {
+            content: "\f079";
+        }
+
+        .fa-retweet-o::before {
+            content: "\f079";
+        }
+
+        .fa-retweet-o-alt::before {
+            content: "\f079";
+        }
+
+        .fa-quote-left-alt::before {
+            content: "\f10d";
+        }
+
+        .fa-quote-right-alt::before {
+            content: "\f10e";
+        }
+
+        .fa-quote-left-o::before {
+            content: "\f10d";
+        }
+
+        .fa-quote-right-o::before {
+            content: "\f10e";
+        }
+
+        .fa-quote-left-o-alt::before {
+            content: "\f10d";
+        }
+
+        .fa-quote-right-o-alt::before {
+            content: "\f10e";
+        }
+
+        .fa-check-circle::before {
+            content: "\f058";
+        }
+
+        .fa-check-circle-o::before {
+            content: "\f058";
+        }
+
+        .fa-check-circle-o-alt::before {
+            content: "\f058";
+        }
+
+        .fa-check-circle-alt::before {
+            content: "\f058";
+        }
+
+        .fa-times-circle::before {
+            content: "\f057";
+        }
+
+        .fa-times-circle-o::before {
+            content: "\f057";
+        }
+
+        .fa-times-circle-o-alt::before {
+            content: "\f057";
+        }
+
+        .fa-times-circle-alt::before {
+            content: "\f057";
+        }
+
+        .fa-info-circle::before {
+            content: "\f05a";
+        }
+
+        .fa-info-circle-o::before {
+            content: "\f05a";
+        }
+
+        .fa-info-circle-o-alt::before {
+            content: "\f05a";
+        }
+
+        .fa-info-circle-alt::before {
+            content: "\f05a";
+        }
+
+        .fa-exclamation-circle::before {
+            content: "\f06a";
+        }
+
+        .fa-exclamation-circle-o::before {
+            content: "\f06a";
+        }
+
+        .fa-exclamation-circle-o-alt::before {
+            content: "\f06a";
+        }
+
+        .fa-exclamation-circle-alt::before {
+            content: "\f06a";
+        }
+
+        .fa-question-circle::before {
+            content: "\f059";
+        }
+
+        .fa-question-circle-o::before {
+            content: "\f059";
+        }
+
+        .fa-question-circle-o-alt::before {
+            content: "\f059";
+        }
+
+        .fa-question-circle-alt::before {
+            content: "\f059";
+        }
+
+        .fa-ban::before {
+            content: "\f05e";
+        }
+
+        .fa-ban-o::before {
+            content: "\f05e";
+        }
+
+        .fa-ban-o-alt::before {
+            content: "\f05e";
+        }
+
+        .fa-ban-alt::before {
+            content: "\f05e";
+        }
+
+        .fa-arrow-left::before {
+            content: "\f060";
+        }
+
+        .fa-arrow-right::before {
+            content: "\f061";
+        }
+
+        .fa-arrow-up::before {
+            content: "\f062";
+        }
+
+        .fa-arrow-down::before {
+            content: "\f063";
+        }
+
+        .fa-arrow-left-alt::before {
+            content: "\f060";
+        }
+
+        .fa-arrow-right-alt::before {
+            content: "\f061";
+        }
+
+        .fa-arrow-up-alt::before {
+            content: "\f062";
+        }
+
+        .fa-arrow-down-alt::before {
+            content: "\f063";
+        }
+
+        .fa-angle-left::before {
+            content: "\f104";
+        }
+
+        .fa-angle-right::before {
+            content: "\f105";
+        }
+
+        .fa-angle-up::before {
+            content: "\f106";
+        }
+
+        .fa-angle-down::before {
+            content: "\f107";
+        }
+
+        .fa-angle-left-alt::before {
+            content: "\f104";
+        }
+
+        .fa-angle-right-alt::before {
+            content: "\f105";
+        }
+
+        .fa-angle-up-alt::before {
+            content: "\f106";
+        }
+
+        .fa-angle-down-alt::before {
+            content: "\f107";
+        }
+
+        .fa-chevron-left::before {
+            content: "\f053";
+        }
+
+        .fa-chevron-right::before {
+            content: "\f054";
+        }
+
+        .fa-chevron-up::before {
+            content: "\f077";
+        }
+
+        .fa-chevron-down::before {
+            content: "\f078";
+        }
+
+        .fa-chevron-left-alt::before {
+            content: "\f053";
+        }
+
+        .fa-chevron-right-alt::before {
+            content: "\f054";
+        }
+
+        .fa-chevron-up-alt::before {
+            content: "\f077";
+        }
+
+        .fa-chevron-down-alt::before {
+            content: "\f078";
+        }
+
+        .fa-caret-left::before {
+            content: "\f0d9";
+        }
+
+        .fa-caret-right::before {
+            content: "\f0da";
+        }
+
+        .fa-caret-up::before {
+            content: "\f0d8";
+        }
+
+        .fa-caret-down::before {
+            content: "\f0d7";
+        }
+
+        .fa-caret-left-alt::before {
+            content: "\f0d9";
+        }
+
+        .fa-caret-right-alt::before {
+            content: "\f0da";
+        }
+
+        .fa-caret-up-alt::before {
+            content: "\f0d8";
+        }
+
+        .fa-caret-down-alt::before {
+            content: "\f0d7";
+        }
+
+        .fa-play::before {
+            content: "\f04b";
+        }
+
+        .fa-pause::before {
+            content: "\f04c";
+        }
+
+        .fa-stop::before {
+            content: "\f04d";
+        }
+
+        .fa-forward::before {
+            content: "\f04e";
+        }
+
+        .fa-backward::before {
+            content: "\f04a";
+        }
+
+        .fa-step-forward::before {
+            content: "\f051";
+        }
+
+        .fa-step-backward::before {
+            content: "\f048";
+        }
+
+        .fa-eject::before {
+            content: "\f052";
+        }
+
+        .fa-fast-forward::before {
+            content: "\f050";
+        }
+
+        .fa-fast-backward::before {
+            content: "\f049";
+        }
+
+        .fa-volume-off-alt::before {
+            content: "\f026";
+        }
+
+        .fa-volume-down-alt::before {
+            content: "\f027";
+        }
+
+        .fa-volume-up-alt::before {
+            content: "\f028";
+        }
+
+        .fa-mute-alt::before {
+            content: "\f131";
+        }
+
+        .fa-headphones-alt::before {
+            content: "\f025";
+        }
+
+        .fa-microphone-alt::before {
+            content: "\f130";
+        }
+
+        .fa-microphone-slash-alt::before {
+            content: "\f131";
+        }
+
+        .fa-video-camera-alt::before {
+            content: "\f03d";
+        }
+
+        .fa-photo-alt::before {
+            content: "\f03e";
+        }
+
+        .fa-picture-o-alt::before {
+            content: "\f03e";
+        }
+
+        .fa-camera-retro-alt::before {
+            content: "\f083";
+        }
+
+        .fa-camera-alt-alt::before {
+            content: "\f030";
+        }
+
+        .fa-film-alt::before {
+            content: "\f008";
+        }
+
+        .fa-tv-alt::before {
+            content: "\f26c";
+        }
+
+        .fa-desktop-alt::before {
+            content: "\f108";
+        }
+
+        .fa-laptop-alt::before {
+            content: "\f109";
+        }
+
+        .fa-tablet-alt-alt::before {
+            content: "\f10a";
+        }
+
+        .fa-mobile-alt-alt::before {
+            content: "\f10b";
+        }
+
+        .fa-mobile-alt-alt-alt::before {
+            content: "\f3cd";
+        }
+
+        .fa-tablet-alt-alt-alt::before {
+            content: "\f3fb";
+        }
+
+        .fa-laptop-code-alt::before {
+            content: "\f5fc";
+        }
+
+        .fa-server-alt::before {
+            content: "\f233";
+        }
+
+        .fa-database-alt::before {
+            content: "\f1c0";
+        }
+
+        .fa-cloud-alt::before {
+            content: "\f0c2";
+        }
+
+        .fa-cloud-upload-alt-alt::before {
+            content: "\f0ee";
+        }
+
+        .fa-cloud-download-alt-alt::before {
+            content: "\f0ed";
+        }
+
+        .fa-cloud-upload-alt-alt-alt::before {
+            content: "\f382";
+        }
+
+        .fa-cloud-download-alt-alt-alt::before {
+            content: "\f381";
+        }
+
+        .fa-umbrella-alt::before {
+            content: "\f0e9";
+        }
+
+        .fa-sun-alt::before {
+            content: "\f185";
+        }
+
+        .fa-moon-alt::before {
+            content: "\f186";
+        }
+
+        .fa-star-half-alt-alt::before {
+            content: "\f5c0";
+        }
+
+        .fa-star-o-alt-alt::before {
+            content: "\f005";
+        }
+
+        .fa-heart-half-alt-alt::before {
+            content: "\f21e";
+        }
+
+        .fa-heart-o-alt-alt::before {
+            content: "\f004";
+        }
+
+        .fa-thumbs-up-alt-alt::before {
+            content: "\f164";
+        }
+
+        .fa-thumbs-down-alt-alt::before {
+            content: "\f165";
+        }
+
+        .fa-comment-alt-alt::before {
+            content: "\f27a";
+        }
+
+        .fa-comments-alt-alt::before {
+            content: "\f086";
+        }
+
+        .fa-share-alt-alt::before {
+            content: "\f1e0";
+        }
+
+        .fa-share-alt-square-alt::before {
+            content: "\f1e1";
+        }
+
+        .fa-retweet-alt-alt::before {
+            content: "\f079";
+        }
+
+        .fa-quote-left-alt-alt::before {
+            content: "\f10d";
+        }
+
+        .fa-quote-right-alt-alt::before {
+            content: "\f10e";
+        }
+
+        .fa-check-circle-alt-alt::before {
+            content: "\f058";
+        }
+
+        .fa-times-circle-alt-alt::before {
+            content: "\f057";
+        }
+
+        .fa-info-circle-alt-alt::before {
+            content: "\f05a";
+        }
+
+        .fa-exclamation-circle-alt-alt::before {
+            content: "\f06a";
+        }
+
+        .fa-question-circle-alt-alt::before {
+            content: "\f059";
+        }
+
+        .fa-ban-alt-alt::before {
+            content: "\f05e";
+        }
+
+        .fa-arrow-left-alt-alt::before {
+            content: "\f060";
+        }
+
+        .fa-arrow-right-alt-alt::before {
+            content: "\f061";
+        }
+
+        .fa-arrow-up-alt-alt::before {
+            content: "\f062";
+        }
+
+        .fa-arrow-down-alt-alt::before {
+            content: "\f063";
+        }
+
+        .fa-angle-left-alt-alt::before {
+            content: "\f104";
+        }
+
+        .fa-angle-right-alt-alt::before {
+            content: "\f105";
+        }
+
+        .fa-angle-up-alt-alt::before {
+            content: "\f106";
+        }
+
+        .fa-angle-down-alt-alt::before {
+            content: "\f107";
+        }
+
+        .fa-chevron-left-alt-alt::before {
+            content: "\f053";
+        }
+
+        .fa-chevron-right-alt-alt::before {
+            content: "\f054";
+        }
+
+        .fa-chevron-up-alt-alt::before {
+            content: "\f077";
+        }
+
+        .fa-chevron-down-alt-alt::before {
+            content: "\f078";
+        }
+
+        .fa-caret-left-alt-alt::before {
+            content: "\f0d9";
+        }
+
+        .fa-caret-right-alt-alt::before {
+            content: "\f0da";
+        }
+
+        .fa-caret-up-alt-alt::before {
+            content: "\f0d8";
+        }
+
+        .fa-caret-down-alt-alt::before {
+            content: "\f0d7";
+        }
+
+        .fa-play-alt::before {
+            content: "\f04b";
+        }
+
+        .fa-pause-alt::before {
+            content: "\f04c";
+        }
+
+        .fa-stop-alt::before {
+            content: "\f04d";
+        }
+
+        .fa-forward-alt::before {
+            content: "\f04e";
+        }
+
+        .fa-backward-alt::before {
+            content: "\f04a";
+        }
+
+        .fa-step-forward-alt::before {
+            content: "\f051";
+        }
+
+        .fa-step-backward-alt::before {
+            content: "\f048";
+        }
+
+        .fa-eject-alt::before {
+            content: "\f052";
+        }
+
+        .fa-fast-forward-alt::before {
+            content: "\f050";
+        }
+
+        .fa-fast-backward-alt::before {
+            content: "\f049";
+        }
+
+        .button{
+            background-color: #000;
+           
+        }
+    .button.a{
+        color: white;
+        background-color: #fff;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">X</div>
+            </div>
+            
+            <div class="nav-item active">
+                <i class="fa fa-home icon"></i>
+                <span>Home</span>
+            </div>
+            
+            <div class="nav-item">
+                <i class="fa fa-search icon"></i>
+                <span> <a href="./explore.html">Explore</a></span>
+            </div>
+            
+            <div class="nav-item">
+                <i class="fa fa-bell icon"><link rel="stylesheet" href=""></i>
+                
+                <button class="button">Notifications</button>
+                
+            </div>
+            
+            <div class="nav-item">
+                <i class="fa fa-envelope icon"></i>
+                <span> <a href="./messages.html">Messages</a></span>
+            </div>
+            
+            <div class="nav-item">
+                <i class="fa fa-hashtag icon"></i>
+                <span>Grok</span>
+            </div>
+            
+            <div class="nav-item">
+                <i class="fa fa-users icon"></i>
+                <span>Communities</span>
+            </div>
+            
+            <div class="nav-item">
+                <i class="fa fa-user icon"></i>
+                <span><a href="explore.html">Profile</a></span>
+            </div>
+            
+            <div class="nav-item">
+                <i class="fa fa-ellipsis-h icon"></i>
+                <span>More</span>
+            </div>
+            
+            <div class="post-btn">
+                Post
+            </div>
+            
+            <div class="user-profile">
+                <div class="avatar">pm</div>
+                <div>
+                    <div class="username">pm 🔒</div>
+                    <div class="handle">@_popmaj</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <div class="tabs">
+                    <div class="tab active">For you</div>
+                    <div class="tab">Following</div>
+                </div>
+            </div>
+            
+            <div class="compose-box">
+                <div class="avatar-small">You</div>
+                <textarea class="compose-input" placeholder="What's happening?"></textarea>
+                <button class="post-btn-small">Post</button>
+            </div>
+            
+            <!-- Post 1 -->
+            <div class="post">
+                <div class="post-header">
+                    
+                    <div class="post-user-info">
+                      
+                    </div>
+                </div>
+                
+                <div class="post-actions">
+                    <button class="action-button">
+                        <i class="fa fa-comment icon"></i>
+                        174
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-retweet icon"></i>
+                        609
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-heart icon"></i>
+                        2.9K
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-chart-bar icon"></i>
+                        97K
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-bookmark icon"></i>
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-share icon"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Ad Post -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-avatar">X</div>
+                    <div class="post-user-info">
+                        <div class="post-name">@XBusiness</div>
+                        <div class="post-handle">@XBusiness</div>
+                        <div class="post-time">· 540m</div>
+                    </div>
+                    <div class="post-user-info" style="margin-left: auto;">
+                        <div class="post-name">Ad</div>
+                        <div class="post-handle">···</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    Want to reach a similar performance?
+                    <br>
+                    <div style="display: flex; align-items: center; margin: 10px 0;">
+                        <i class="fa fa-calendar icon" style="margin-right: 5px;"></i>
+                        Register to our Webinar 'X Ads for Beginners' to learn how!
+                    </div>
+                    <div style="margin-top: 15px; background-color: #15202B; padding: 15px; border-radius: 10px;">
+                        <div style="font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 10px;">BUSINESS</div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+                            <div style="flex: 1; margin-right: 10px; background-color: #272C34; padding: 10px; border-radius: 8px;">
+                                <div style="font-size: 14px; color: #65666A;">Post</div>
+                                <div style="font-size: 12px; color: #65666A;">Many failed before. Will YOU complete the trial?</div>
+                            </div>
+                            <div style="flex: 1; background-color: #272C34; padding: 10px; border-radius: 8px;">
+                                <div style="font-size: 14px; color: #65666A;">Gaming wins on X</div>
+                                <div style="font-size: 12px; color: #65666A;">Nexters boosted performance with</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <button class="action-button">
+                        <i class="fa fa-comment icon"></i>
+                        174
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-retweet icon"></i>
+                        609
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-heart icon"></i>
+                        2.9K
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-chart-bar icon"></i>
+                        97K
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-bookmark icon"></i>
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-share icon"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Post 2 -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-avatar">D</div>
+                    <div class="post-user-info">
+                        <div class="post-name">Don Eazi</div>
+                        <div class="post-handle">@mreazi</div>
+                        <div class="post-time">· 9m</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    It's a powerful declaration 🎤
+                    <br><br>
+                    <div style="background-color: #15202B; padding: 15px; border-radius: 10px; margin: 10px 0;">
+                        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <div class="post-avatar" style="margin-right: 10px;">L</div>
+                            <div>
+                                <div class="post-name">LaPetite 🌹 PBD/1590</div>
+                                <div class="post-handle">@_WavesOfIris_</div>
+                                <div class="post-time">· 40m</div>
+                            </div>
+                        </div>
+                        <div>
+                            I didn't realize how much I had internalized that Mr Eazi's; "Thank you God for keeping things running smoothly", until I found myself saying it in my prayers this morning.
+                            <br><br>
+                            Guess I've heard it so many times, it just stuck. 😊
+                        </div>
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <button class="action-button">
+                        <i class="fa fa-comment icon"></i>
+                        43
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-retweet icon"></i>
+                        79
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-heart icon"></i>
+                        483
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-chart-bar icon"></i>
+                        7.4K
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-bookmark icon"></i>
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-share icon"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Post 3 -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-avatar">D</div>
+                    <div class="post-user-info">
+                        <div class="post-name">Dabz Global |ABUJA |Phone|Laptop|Accessories</div>
+                        <div class="post-handle">@dabz_global</div>
+                        <div class="post-time">· 1h</div>
+                    </div>
+                    <div class="post-user-info" style="margin-left: auto;">
+                        <div class="post-name">Ad</div>
+                        <div class="post-handle">···</div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    The all new Samsung galaxy Z fold 7/Flip 7 with Samsung WARRANTY. DM/CALL 08076709313/08144343028/ VISIT C3 NEW BANEX PLAZA WUSE, ABUJA
+                    <br><br>
+                    Fold 7<br>
+                    256gb - N2,300,000<br>
+                    512gb - N2,500,000<br>
+                    1TB - N2,950,000
+                    <br><br>
+                    Flip 7<br>
+                    256gb - N1,380,000
+                    <br><br>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+                        <img src="https://placehold.co/150x150" alt="Product" style="border-radius: 8px; width: 150px; height: 150px; object-fit: cover;">
+                        <img src="https://placehold.co/150x150" alt="Product" style="border-radius: 8px; width: 150px; height: 150px; object-fit: cover;">
+                        <img src="https://placehold.co/150x150" alt="Product" style="border-radius: 8px; width: 150px; height: 150px; object-fit: cover;">
+                        <img src="https://placehold.co/150x150" alt="Product" style="border-radius: 8px; width: 150px; height: 150px; object-fit: cover;">
+                    </div>
+                </div>
+                <div class="post-actions">
+                    <button class="action-button">
+                        <i class="fa fa-comment icon"></i>
+                        43
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-retweet icon"></i>
+                        73
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-heart icon"></i>
+                        468
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-chart-bar icon"></i>
+                        7.4K
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-bookmark icon"></i>
+                    </button>
+                    <button class="action-button">
+                        <i class="fa fa-share icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Sidebar -->
+        <div class="right-sidebar">
+            <div class="search-box">
+                <i class="fa fa-search icon"></i>
+                <input type="text" placeholder="Search">
+            </div>
+            
+            <div class="card">
+                <div class="card-title">Subscribe to Premium</div>
+                <div style="color: var(--light-gray); margin-bottom: 15px;">
+                    Subscribe to unlock new features and if eligible, receive a share of revenue.
+                </div>
+                <button class="subscribe-btn">Subscribe</button>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">Today's News</div>
+                <div class="close-btn">×</div>
+                
+                <div class="news-item">
+                    <div class="news-avatar">L</div>
+                    <div class="news-content">
+                        <div class="news-title">Liverpool Edges Southampton 2-1 in Carabao Cup but Leoni Suffers Knee Injury</div>
+                        <div class="news-meta">23 hours ago · Sports · 96K posts</div>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-avatar">R</div>
+                    <div class="news-content">
+                        <div class="news-title">Real Madrid Crush Levante 4-1 to Extend Perfect La Liga Record</div>
+                        <div class="news-meta">11 hours ago · Sports · 56.8K posts</div>
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-avatar">N</div>
+                    <div class="news-content">
+                        <div class="news-title">Nicki Minaj Teases Sixth Album Release on March 27, 2026</div>
+                        <div class="news-meta">3 hours ago · Entertainment · 67.5K posts</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">What's happening</div>
+                <div class="close-btn">×</div>
+                
+                <div class="trending-item">
+                    <div class="trending-image">M</div>
+                    <div class="trending-content">
+                        <div class="trending-title">Milan Fashion Week 2025 Womenswear SS26</div>
+                        <div class="trending-meta">LIVE</div>
+                    </div>
+                </div>
+                
+                <div class="trending-item">
+                    <div class="trending-image">#</div>
+                    <div class="trending-content">
+                        <div class="trending-title">Trending in Nigeria</div>
+                        <div class="trending-meta">#กบหรุ่ด · 135K posts</div>
+                    </div>
+                </div>
+                
+                <div class="trending-item">
+                    <div class="trending-image">I</div>
+                    <div class="trending-content">
+                        <div class="trending-title">Trending in Nigeria</div>
+                        <div class="trending-meta">Island</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">Messages</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                    <i class="fa fa-envelope icon" style="font-size: 20px;"></i>
+                    <i class="fa fa-arrow-up icon" style="font-size: 20px;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="messages-btn">
+        <i class="fa fa-paper-plane icon"></i>
+    </div>
+</body>
+</html>
